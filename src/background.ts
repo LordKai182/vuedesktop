@@ -82,6 +82,17 @@ app.on('ready', async () => {
   }
   createWindow()
 })
+if (process.env.NODE_ENV !== 'development') {
+  autoUpdater.setFeedURL({
+    provider: 'github',
+    repo: "https://github.com/LordKai182/vuedesktop.git",
+    token: "c99d27ba417f4c2b715f397a7d77fe238db35f13",
+    owner: "LordKai182",
+    private: true,
+    
+  });
+  autoUpdater.checkForUpdates();
+}
 
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
