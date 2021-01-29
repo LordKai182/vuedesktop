@@ -6,6 +6,34 @@ on:
 
 jobs:
 
+  publish_on_linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2       
+    - uses: actions/setup-node@master
+      with:
+        node-version: 14
+    - name: install dependencies
+      run: npm install
+    - name: publish
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: npm run publish
+
+  publish_on_mac:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@master
+      with:
+        node-version: 14
+    - name: install dependencies
+      run: npm install
+    - name: publish
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: npm run publish
+
   publish_on_win:
     runs-on: windows-latest
     steps:
@@ -17,5 +45,5 @@ jobs:
       run: npm install
     - name: publish
       env:
-        GITHUB_TOKEN: c99d27ba417f4c2b715f397a7d77fe238db35f13
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: npm run publish
